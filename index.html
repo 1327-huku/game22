@@ -3,15 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>AERO-MEMORY // COGNITIVE MATRIX LAB</title>
+<title>AERO-MEMORY LAB // MULTI-GAME & DLC EDITION</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap');
 
   :root {
-    --bg-main: #f4f8fb;
     --bg-gradient: linear-gradient(135deg, #f8fbff 0%, #ebf5f9 50%, #eefaf4 100%);
-    --card-bg: rgba(255, 255, 255, 0.92);
-    --card-border: rgba(14, 165, 233, 0.25);
+    --card-bg: rgba(255, 255, 255, 0.94);
+    --card-border: rgba(14, 165, 233, 0.24);
     --text-primary: #0f172a;
     --text-secondary: #475569;
     --text-muted: #94a3b8;
@@ -22,10 +21,13 @@
     --emerald: #059669;
     --emerald-bright: #10b981;
     --emerald-soft: #d1fae5;
+    --teal: #0d9488;
     --amber: #d97706;
     --amber-soft: #fef3c7;
     --rose: #e11d48;
     --rose-soft: #ffe4e6;
+    --violet: #7c3aed;
+    --violet-soft: #ede9fe;
 
     --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.05);
     --shadow-md: 0 12px 32px rgba(2, 132, 199, 0.09);
@@ -76,11 +78,11 @@
     z-index: 10;
     width: 100%;
     height: 100%;
-    max-width: 820px;
+    max-width: 860px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    padding: 12px;
+    padding: 10px;
   }
 
   /* Top Navigation Bar */
@@ -88,7 +90,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 16px;
+    padding: 10px 14px;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 16px;
@@ -103,9 +105,10 @@
     align-items: center;
     gap: 8px;
     font-weight: 800;
-    font-size: 0.98rem;
+    font-size: 0.96rem;
     letter-spacing: -0.02em;
     color: var(--text-primary);
+    cursor: pointer;
   }
 
   .brand-dot {
@@ -119,14 +122,14 @@
   .hud-stats {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     font-family: var(--font-mono);
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 700;
   }
 
   .stat-pill {
-    padding: 4px 10px;
+    padding: 4px 9px;
     border-radius: 99px;
     background: var(--blue-soft);
     color: var(--blue);
@@ -140,6 +143,23 @@
   .stat-pill.danger {
     background: var(--rose-soft);
     color: var(--rose);
+  }
+
+  .btn-dlc-top {
+    padding: 4px 10px;
+    border-radius: 99px;
+    border: 1.5px solid var(--blue-bright);
+    background: #ffffff;
+    color: var(--blue);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-dlc-top:hover {
+    background: var(--blue-soft);
   }
 
   /* Main Card Surface */
@@ -162,8 +182,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 18px;
+    padding: 16px;
     opacity: 0;
     pointer-events: none;
     transform: translateY(8px);
@@ -177,118 +196,196 @@
     transform: translateY(0);
   }
 
-  /* Title Screen */
+  .screen.center-content {
+    justify-content: center;
+  }
+
+  /* Title & Game Hub Screen */
+  .hero-header {
+    text-align: center;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+  }
+
   .hero-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 5px 14px;
+    padding: 4px 12px;
     border-radius: 99px;
     background: var(--emerald-soft);
     color: var(--emerald);
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 800;
     letter-spacing: 0.06em;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
 
   .hero-title {
-    font-size: clamp(1.75rem, 5vw, 2.7rem);
+    font-size: clamp(1.55rem, 4.5vw, 2.3rem);
     font-weight: 800;
-    text-align: center;
     letter-spacing: -0.03em;
     line-height: 1.15;
     background: linear-gradient(135deg, #0f172a 15%, #0284c7 60%, #059669 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 
-  .hero-desc {
+  .hero-sub {
     color: var(--text-secondary);
-    font-size: 0.88rem;
-    text-align: center;
-    max-width: 480px;
-    line-height: 1.55;
-    margin-bottom: 18px;
+    font-size: 0.84rem;
   }
 
-  /* Mode Selector Cards */
-  .mode-grid {
+  /* Game Catalog Grid */
+  .game-catalog {
     width: 100%;
-    max-width: 560px;
+    max-width: 720px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
 
-  .mode-card {
+  .game-card {
     background: #ffffff;
     border: 2px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 12px;
+    border-radius: 18px;
+    padding: 14px;
     text-align: left;
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
-  .mode-card:hover {
+  .game-card:hover {
     border-color: var(--blue-bright);
     transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
   }
 
-  .mode-card.selected {
+  .game-card.selected {
     border-color: var(--blue);
     background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
-    box-shadow: 0 8px 20px rgba(2, 132, 199, 0.14);
+    box-shadow: 0 8px 22px rgba(2, 132, 199, 0.16);
   }
 
-  .mode-tag {
-    display: inline-block;
+  .game-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .game-tag {
     font-family: var(--font-mono);
     font-size: 0.68rem;
-    font-weight: 700;
+    font-weight: 800;
     padding: 2px 8px;
     border-radius: 6px;
     background: var(--blue-soft);
     color: var(--blue);
-    margin-bottom: 6px;
   }
 
-  .mode-card.hard .mode-tag {
-    background: var(--amber-soft);
-    color: var(--amber);
+  .game-tag.emerald { background: var(--emerald-soft); color: var(--emerald); }
+  .game-tag.amber { background: var(--amber-soft); color: var(--amber); }
+  .game-tag.violet { background: var(--violet-soft); color: var(--violet); }
+  .game-tag.dlc { background: var(--rose-soft); color: var(--rose); }
+
+  .game-best {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-muted);
   }
 
-  .mode-card.insane .mode-tag {
-    background: var(--rose-soft);
-    color: var(--rose);
-  }
-
-  .mode-name {
+  .game-title {
     font-weight: 800;
-    font-size: 0.95rem;
+    font-size: 1.02rem;
     color: var(--text-primary);
-    margin-bottom: 3px;
+    margin-bottom: 4px;
   }
 
-  .mode-sub {
-    font-size: 0.75rem;
+  .game-desc {
+    font-size: 0.77rem;
     color: var(--text-secondary);
-    line-height: 1.4;
+    line-height: 1.45;
   }
 
-  /* Buttons */
+  /* Sub-difficulty selector bar */
+  .diff-bar {
+    width: 100%;
+    max-width: 720px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 10px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .diff-label {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+  }
+
+  .diff-pills {
+    display: flex;
+    gap: 6px;
+  }
+
+  .diff-btn {
+    padding: 6px 12px;
+    border-radius: 9px;
+    border: 1.5px solid #cbd5e1;
+    background: #ffffff;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .diff-btn.active {
+    border-color: var(--blue);
+    background: var(--blue);
+    color: #ffffff;
+  }
+
+  .diff-btn.active.hard {
+    border-color: var(--amber);
+    background: var(--amber);
+  }
+
+  .diff-btn.active.insane {
+    border-color: var(--rose);
+    background: var(--rose);
+  }
+
+  .action-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
   .btn-primary {
     background: linear-gradient(135deg, var(--blue) 0%, var(--emerald) 100%);
     color: #ffffff;
     border: none;
     border-radius: 14px;
-    padding: 15px 38px;
+    padding: 14px 36px;
     font-family: var(--font-sans);
-    font-size: 1rem;
+    font-size: 0.98rem;
     font-weight: 800;
     letter-spacing: 0.04em;
     cursor: pointer;
@@ -301,18 +398,16 @@
     box-shadow: 0 14px 30px rgba(5, 150, 105, 0.32);
   }
 
-  .btn-primary:active {
-    transform: scale(0.97);
-  }
+  .btn-primary:active { transform: scale(0.97); }
 
   .btn-secondary {
     background: #ffffff;
     color: var(--text-primary);
     border: 1.5px solid #cbd5e1;
     border-radius: 14px;
-    padding: 13px 26px;
+    padding: 13px 22px;
     font-family: var(--font-sans);
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -323,14 +418,14 @@
     color: var(--blue);
   }
 
-  /* Game Stage */
+  /* Game Stage Common Header */
   .stage-header {
     width: 100%;
-    max-width: 460px;
+    max-width: 480px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     flex-shrink: 0;
   }
 
@@ -348,23 +443,21 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 8px 18px;
+    padding: 8px 16px;
     border-radius: 12px;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     font-weight: 800;
     background: var(--blue-soft);
     color: var(--blue);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     text-align: center;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.1);
+    transition: all 0.2s ease;
   }
 
   .rule-banner.reverse {
     background: var(--amber-soft);
     color: var(--amber);
     border: 1.5px solid rgba(217, 119, 6, 0.35);
-    box-shadow: 0 4px 14px rgba(217, 119, 6, 0.18);
   }
 
   .rule-banner.insane {
@@ -393,7 +486,7 @@
     border-radius: 99px;
   }
 
-  /* Matrix Board - Strict Square Aspect Ratio Fix */
+  /* Shared Square Board */
   .matrix-wrapper {
     position: relative;
     padding: 12px;
@@ -408,8 +501,8 @@
   .matrix-grid {
     display: grid;
     gap: 8px;
-    width: min(78vw, 370px, 46vh);
-    height: min(78vw, 370px, 46vh);
+    width: min(76vw, 355px, 44vh);
+    height: min(76vw, 355px, 44vh);
   }
 
   .cell {
@@ -424,18 +517,16 @@
     align-items: center;
     justify-content: center;
     font-family: var(--font-mono);
-    font-size: clamp(1.15rem, 3.8vw, 1.7rem);
+    font-size: clamp(1.1rem, 3.6vw, 1.65rem);
     font-weight: 800;
     color: var(--text-primary);
     cursor: pointer;
-    transition: transform 0.12s ease, background-color 0.2s ease, border-color 0.2s ease;
+    transition: transform 0.12s ease, background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
   }
 
-  .cell:active {
-    transform: scale(0.92);
-  }
+  .cell:active { transform: scale(0.92); }
 
-  /* Cell States */
+  /* Game 1 & 4 Cell States */
   .cell.visible {
     background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
     border-color: var(--blue-bright);
@@ -456,9 +547,7 @@
     box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
   }
 
-  .cell.hidden-tile .cell-inner {
-    opacity: 0;
-  }
+  .cell.hidden-tile .cell-inner { opacity: 0; }
 
   .cell.solved {
     background: var(--emerald-soft);
@@ -467,10 +556,7 @@
     pointer-events: none;
     animation: pop-in 0.22s ease;
   }
-
-  .cell.solved .cell-inner {
-    opacity: 1;
-  }
+  .cell.solved .cell-inner { opacity: 1; }
 
   .cell.wrong {
     background: var(--rose-soft);
@@ -478,14 +564,177 @@
     color: var(--rose);
     animation: shake 0.35s ease;
   }
-
-  .cell.wrong .cell-inner {
-    opacity: 1;
-  }
+  .cell.wrong .cell-inner { opacity: 1; }
 
   .cell-inner {
     transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.1;
+  }
+
+  /* Game 2: Sequence Pulse Pad States */
+  .cell.pulse-pad {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+  }
+  .cell.pulse-lit-blue {
+    background: linear-gradient(135deg, #0ea5e9, #38bdf8) !important;
+    border-color: #0284c7 !important;
+    box-shadow: 0 0 22px rgba(14, 165, 233, 0.55);
+    transform: scale(1.03);
+  }
+  .cell.pulse-lit-green {
+    background: linear-gradient(135deg, #10b981, #34d399) !important;
+    border-color: #059669 !important;
+    box-shadow: 0 0 22px rgba(16, 185, 129, 0.55);
+    transform: scale(1.03);
+  }
+  .cell.pulse-lit-red {
+    background: linear-gradient(135deg, #f43f5e, #fb7185) !important;
+    border-color: #e11d48 !important;
+    box-shadow: 0 0 22px rgba(244, 63, 94, 0.55);
+    transform: scale(1.03);
+  }
+
+  /* Game 3: Dual N-Back UI */
+  .nback-letter {
+    font-size: clamp(2.1rem, 7vw, 3.1rem);
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  }
+
+  .nback-controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 14px;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .btn-nback {
+    flex: 1;
+    padding: 15px 10px;
+    border-radius: 16px;
+    border: 2px solid #cbd5e1;
+    background: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.14s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .btn-nback span.sub {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-muted);
+  }
+
+  .btn-nback.pressed {
+    border-color: var(--blue);
+    background: var(--blue-soft);
+    color: var(--blue);
+    transform: scale(0.97);
+  }
+
+  .btn-nback.hit-ok {
+    border-color: var(--emerald);
+    background: var(--emerald-soft);
+    color: var(--emerald);
+  }
+
+  .btn-nback.hit-bad {
+    border-color: var(--rose);
+    background: var(--rose-soft);
+    color: var(--rose);
+  }
+
+  /* Game 4: Symbol & Color Styles */
+  .sym-blue { color: #0284c7; }
+  .sym-green { color: #059669; }
+  .sym-amber { color: #d97706; }
+  .sym-violet { color: #7c3aed; }
+
+  /* DLC Modal Overlay */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(6px);
+    z-index: 50;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .modal-backdrop.open {
+    display: flex;
+  }
+
+  .modal-card {
+    width: 100%;
+    max-width: 540px;
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 22px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+    max-height: 88vh;
+    overflow-y: auto;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+  }
+
+  .modal-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .dlc-preset-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .dlc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    background: #f8fafc;
+  }
+
+  .dlc-textarea {
+    width: 100%;
+    height: 110px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    margin-bottom: 12px;
+    resize: vertical;
   }
 
   /* Result Screen */
@@ -548,16 +797,9 @@
 
   .r-value {
     font-family: var(--font-mono);
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 800;
     color: var(--text-primary);
-  }
-
-  .result-btns {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
   }
 
   @keyframes pop-in {
@@ -581,7 +823,7 @@
 
 <div id="app">
   <header class="top-bar">
-    <div class="brand">
+    <div class="brand" id="btn-brand-home" title="タイトルへ戻る">
       <div class="brand-dot"></div>
       <span>AERO-MEMORY LAB</span>
     </div>
@@ -589,44 +831,40 @@
       <div class="stat-pill" id="hud-level">LV.01</div>
       <div class="stat-pill" id="hud-score">0 PTS</div>
       <div class="stat-pill lives" id="hud-lives">♥♥♥</div>
+      <button class="btn-dlc-top" id="btn-open-dlc">+ DLC</button>
     </div>
   </header>
 
   <main class="main-surface">
-    <!-- SCREEN 1: START -->
+    <!-- SCREEN 1: MULTI-GAME HUB -->
     <section class="screen active" id="screen-start">
-      <div class="hero-badge">COGNITIVE WORKING MEMORY TEST</div>
-      <h1 class="hero-title">AERO-MEMORY<br>MATRIX</h1>
-      <p class="hero-desc">
-        表示された数字の位置とルールを瞬時に記憶し、パネルが隠されたあとに順番通り解き明かす高難易度・空間記憶トレーニング。
-      </p>
+      <div class="hero-header">
+        <div class="hero-badge">4 COGNITIVE ENGINES + DLC SYSTEM</div>
+        <h1 class="hero-title">AERO-MEMORY LAB</h1>
+        <p class="hero-sub">脳の異なる記憶領域を極限まで鍛える4種類の高難易度トレーニング＆DLC拡張</p>
+      </div>
 
-      <div class="mode-grid" id="mode-grid">
-        <div class="mode-card selected" data-mode="standard">
-          <div class="mode-tag">STANDARD</div>
-          <div class="mode-name">標準プロトコル</div>
-          <div class="mode-sub">4×4〜6×6盤面。偶数レベルでは【逆順（大→小）】ルールが出現。</div>
-        </div>
-        <div class="mode-card hard" data-mode="rotation">
-          <div class="mode-tag">HARD // ROTATE</div>
-          <div class="mode-name">空間回転モード</div>
-          <div class="mode-sub">隠された直後に盤面全体が90°〜180°回転。頭の中で座標変換せよ。</div>
-        </div>
-        <div class="mode-card insane" data-mode="chaos">
-          <div class="mode-tag">INSANE // CHAOS</div>
-          <div class="mode-name">極限カオスモード</div>
-          <div class="mode-sub">逆順入力・罠数字（赤いダミー）・盤面回転が複合する最高難度。</div>
+      <div class="game-catalog" id="game-catalog"></div>
+
+      <div class="diff-bar">
+        <div class="diff-label" id="selected-game-label">選択中: CHIMP MATRIX</div>
+        <div class="diff-pills" id="diff-pills">
+          <button class="diff-btn active" data-diff="standard">STANDARD</button>
+          <button class="diff-btn hard" data-diff="hard">HARD</button>
+          <button class="diff-btn insane" data-diff="insane">INSANE</button>
         </div>
       </div>
 
-      <button class="btn-primary" id="btn-start">テストを開始する</button>
+      <div class="action-row">
+        <button class="btn-primary" id="btn-start">選択したゲームを開始</button>
+      </div>
     </section>
 
-    <!-- SCREEN 2: GAME -->
-    <section class="screen" id="screen-game">
+    <!-- SCREEN 2: ACTIVE GAME ARENA -->
+    <section class="screen center-content" id="screen-game">
       <div class="stage-header">
         <div class="phase-indicator" id="phase-indicator">MEMORIZE PHASE</div>
-        <div class="rule-banner" id="rule-banner">【昇順】 1 → 4 の順にタップせよ</div>
+        <div class="rule-banner" id="rule-banner">1 から順番にタップせよ</div>
         <div class="timer-bar-wrap">
           <div class="timer-bar-fill" id="timer-fill"></div>
         </div>
@@ -635,23 +873,35 @@
       <div class="matrix-wrapper" id="matrix-wrapper">
         <div class="matrix-grid" id="matrix-grid"></div>
       </div>
+
+      <!-- Dedicated Controls for Dual N-Back -->
+      <div class="nback-controls" id="nback-controls" style="display:none;">
+        <button class="btn-nback" id="btn-match-pos">
+          <span>位置が同じ</span>
+          <span class="sub">POSITION MATCH [A / ←]</span>
+        </button>
+        <button class="btn-nback" id="btn-match-let">
+          <span>文字が同じ</span>
+          <span class="sub">LETTER MATCH [L / →]</span>
+        </button>
+      </div>
     </section>
 
     <!-- SCREEN 3: RESULT -->
-    <section class="screen" id="screen-result">
+    <section class="screen center-content" id="screen-result">
       <div class="result-card">
-        <div class="rank-pill" id="res-mode-badge">STANDARD PROTOCOL</div>
+        <div class="rank-pill" id="res-mode-badge">CHIMP MATRIX // STANDARD</div>
         <div class="rank-grade" id="res-rank">S+</div>
         <div class="rank-subtitle" id="res-title">超人的な空間ワーキングメモリ</div>
 
         <div class="result-metrics">
           <div class="r-box">
-            <div class="r-label">REACHED LEVEL</div>
+            <div class="r-label">REACHED STAGE</div>
             <div class="r-value" id="res-level">LV.08</div>
           </div>
           <div class="r-box">
-            <div class="r-label">MAX DIGITS</div>
-            <div class="r-value" id="res-digits">10個</div>
+            <div class="r-label" id="res-stat2-label">MAX RECORD</div>
+            <div class="r-value" id="res-stat2">10</div>
           </div>
           <div class="r-box">
             <div class="r-label">TOTAL SCORE</div>
@@ -659,18 +909,40 @@
           </div>
         </div>
 
-        <div class="result-btns">
+        <div class="action-row">
           <button class="btn-primary" id="btn-retry">もう一度挑戦する</button>
-          <button class="btn-secondary" id="btn-home">モード選択へ</button>
+          <button class="btn-secondary" id="btn-home">ゲーム選択へ</button>
         </div>
       </div>
     </section>
   </main>
 </div>
 
+<!-- DLC MANAGER MODAL -->
+<div class="modal-backdrop" id="dlc-modal">
+  <div class="modal-card">
+    <div class="modal-title">DLC 拡張マネージャー（追加パック＆カスタム導入）</div>
+    <p class="modal-desc">
+      同梱の追加DLCパックを有効化したり、新しいカスタムDLC（JSON形式）を貼り付けてゲームに無限に種目を追加できます。データはブラウザに自動保存されます。
+    </p>
+
+    <div class="dlc-preset-list" id="dlc-preset-list"></div>
+
+    <div style="font-size:0.78rem; font-weight:800; margin-bottom:6px; color:var(--text-primary);">
+      カスタムDLC JSONインポート（上級者・自作DLC追加用）
+    </div>
+    <textarea class="dlc-textarea" id="dlc-json-input" placeholder='{"id":"custom_blitz","engine":"chimp","tag":"DLC // CUSTOM","title":"BLITZ MATRIX","desc":"超高速記憶・1.2秒でパネルが消える極限モード","gridSize":5,"startDigits":5,"memorizeMs":1200,"reverseEveryLevel":true,"decoys":2,"rotate":true}'></textarea>
+
+    <div class="action-row" style="justify-content:flex-end;">
+      <button class="btn-secondary" id="btn-install-json">JSONからDLC追加</button>
+      <button class="btn-primary" id="btn-close-dlc" style="padding:12px 24px;">閉じる</button>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ==========================================================================
-   1. CLEAN MARIMBA & CRYSTAL SYNTH AUDIO (Web Audio API)
+   1. CLEAN CRYSTAL & MARIMBA SYNTH AUDIO
    ========================================================================== */
 const Sound = {
   ctx: null,
@@ -680,7 +952,7 @@ const Sound = {
     }
     if (this.ctx.state === 'suspended') this.ctx.resume();
   },
-  playNote(freq, duration = 0.16, vol = 0.18, type = 'sine') {
+  playNote(freq, duration = 0.16, vol = 0.16, type = 'sine') {
     this.init();
     const t = this.ctx.currentTime;
     const osc = this.ctx.createOscillator();
@@ -700,28 +972,30 @@ const Sound = {
   step(index) {
     const scale = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.50, 1174.66, 1318.51, 1567.98, 1760.00];
     const freq = scale[index % scale.length] * (1 + Math.floor(index / scale.length) * 0.25);
-    this.playNote(freq, 0.22, 0.18, 'triangle');
+    this.playNote(freq, 0.2, 0.16, 'triangle');
   },
-  hide() {
-    this.playNote(392.00, 0.14, 0.12, 'sine');
+  pad(index) {
+    const tones = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99];
+    this.playNote(tones[index % tones.length], 0.24, 0.18, 'sine');
   },
+  hide() { this.playNote(392.00, 0.14, 0.12, 'sine'); },
   rotate() {
-    this.playNote(440, 0.2, 0.12, 'sine');
-    setTimeout(() => this.playNote(554.37, 0.22, 0.12, 'sine'), 70);
+    this.playNote(440, 0.18, 0.12, 'sine');
+    setTimeout(() => this.playNote(554.37, 0.2, 0.12, 'sine'), 70);
   },
   wrong() {
-    this.playNote(185, 0.28, 0.22, 'sawtooth');
-    setTimeout(() => this.playNote(146.83, 0.32, 0.2, 'sawtooth'), 90);
+    this.playNote(185, 0.28, 0.2, 'sawtooth');
+    setTimeout(() => this.playNote(146.83, 0.32, 0.18, 'sawtooth'), 90);
   },
   stageClear() {
     [523.25, 659.25, 783.99, 1046.50].forEach((f, i) => {
-      setTimeout(() => this.playNote(f, 0.28, 0.16, 'triangle'), i * 75);
+      setTimeout(() => this.playNote(f, 0.25, 0.15, 'triangle'), i * 70);
     });
   }
 };
 
 /* ==========================================================================
-   2. LIGHTWEIGHT PARTICLE BURST VFX
+   2. PARTICLE VFX
    ========================================================================== */
 const fxCanvas = document.getElementById('fx-canvas');
 const fxCtx = fxCanvas.getContext('2d');
@@ -735,14 +1009,14 @@ window.addEventListener('resize', resizeFX);
 resizeFX();
 
 function emitBurst(x, y, colors = ['#0ea5e9', '#10b981', '#38bdf8']) {
-  for (let i = 0; i < 16; i++) {
-    const angle = (Math.PI * 2 * i) / 16 + (Math.random() - 0.5) * 0.4;
-    const speed = 2.5 + Math.random() * 5.5;
+  for (let i = 0; i < 14; i++) {
+    const angle = (Math.PI * 2 * i) / 14 + (Math.random() - 0.5) * 0.4;
+    const speed = 2.4 + Math.random() * 5.0;
     particles.push({
       x, y,
       vx: Math.cos(angle) * speed,
       vy: Math.sin(angle) * speed,
-      r: 3 + Math.random() * 3.5,
+      r: 3 + Math.random() * 3.2,
       alpha: 1,
       color: colors[i % colors.length]
     });
@@ -757,7 +1031,7 @@ function renderFX() {
     p.y += p.vy;
     p.vx *= 0.93;
     p.vy *= 0.93;
-    p.alpha -= 0.035;
+    p.alpha -= 0.036;
     if (p.alpha <= 0) {
       particles.splice(i, 1);
       continue;
@@ -775,44 +1049,307 @@ function renderFX() {
 renderFX();
 
 /* ==========================================================================
-   3. HIGH-DIFFICULTY MEMORY GAME ENGINE (BUG-FREE & COMPLETE)
+   3. BUILT-IN GAMES + DLC REGISTRY SYSTEM
    ========================================================================== */
-const Game = {
-  mode: 'standard',
-  level: 1,
-  score: 0,
-  lives: 3,
-  maxDigitsCleared: 0,
-  phase: 'idle', // memorize | recall | transition
-  gridSize: 4,
-  targetCount: 4,
-  expectedSequence: [],
-  currentIndex: 0,
-  nextRotation: 0,
-  timerRAF: null,
+const CORE_GAMES = [
+  {
+    id: 'chimp',
+    engine: 'chimp',
+    tag: 'GAME 01 // SPATIAL',
+    tagClass: '',
+    title: 'CHIMP MATRIX（瞬間位置記憶）',
+    desc: '盤面の数字位置を瞬時に記憶。難易度に応じて逆順タップ・赤い罠数字・盤面回転が発動。'
+  },
+  {
+    id: 'pulse',
+    engine: 'pulse',
+    tag: 'GAME 02 // SEQUENCE',
+    tagClass: 'emerald',
+    title: 'SEQUENCE PULSE（発光順序＆フィルタ）',
+    desc: '高速で光るパネルの順番を記憶して再現。上級では「逆順入力」や「赤発光無視」ルールが割り込む。'
+  },
+  {
+    id: 'nback',
+    engine: 'nback',
+    tag: 'GAME 03 // WORKING MEMORY',
+    tagClass: 'amber',
+    title: 'DUAL N-BACK（脳科学・二重Nバック）',
+    desc: '連続で変わる「位置」と「文字」を同時記憶。N回前と一致したら即座にボタンを押す最難関課題。'
+  },
+  {
+    id: 'symbol',
+    engine: 'symbol',
+    tag: 'GAME 04 // ATTRIBUTE',
+    tagClass: 'violet',
+    title: 'FLASH SYMBOL（色×図形ペア記憶）',
+    desc: '盤面に並ぶ「4色の記号」を一瞬で記憶し、指定された条件のパネルだけをノーミスで全開放せよ。'
+  }
+];
+
+const BUILTIN_DLCS = [
+  {
+    id: 'dlc_phantom_mirror',
+    engine: 'chimp',
+    tag: 'DLC PACK 01',
+    tagClass: 'dlc',
+    title: 'PHANTOM MIRROR（鏡像＆全回転）',
+    desc: '全レベルで盤面が180°反転＋罠数字が出現する特別拡張プロトコル。',
+    config: { forceRotate: 180, extraDecoys: 2, fastMem: true }
+  },
+  {
+    id: 'dlc_4x4_pulse',
+    engine: 'pulse',
+    tag: 'DLC PACK 02',
+    tagClass: 'dlc',
+    title: 'HYPER PULSE 16（16パネル超高速）',
+    desc: '3×3から4×4（16マス）へ拡張された超広域・高速発光シーケンスDLC。',
+    config: { gridSize: 4, fastPulse: true }
+  }
+];
+
+const DLCManager = {
+  installedIds: [],
+  customDLCs: [],
+
+  load() {
+    try {
+      this.installedIds = JSON.parse(localStorage.getItem('aero_dlc_ids') || '[]');
+      this.customDLCs = JSON.parse(localStorage.getItem('aero_dlc_custom') || '[]');
+    } catch (e) {
+      this.installedIds = [];
+      this.customDLCs = [];
+    }
+  },
+
+  save() {
+    localStorage.setItem('aero_dlc_ids', JSON.stringify(this.installedIds));
+    localStorage.setItem('aero_dlc_custom', JSON.stringify(this.customDLCs));
+  },
+
+  toggleBuiltin(id) {
+    if (this.installedIds.includes(id)) {
+      this.installedIds = this.installedIds.filter(x => x !== id);
+    } else {
+      this.installedIds.push(id);
+    }
+    this.save();
+  },
+
+  installCustomJSON(rawText) {
+    const obj = JSON.parse(rawText);
+    if (!obj.title || !obj.engine) {
+      throw new Error('JSONに "title" と "engine" ("chimp"|"pulse"|"nback"|"symbol") が必要です');
+    }
+    const dlc = {
+      id: obj.id || 'custom_' + Date.now(),
+      engine: obj.engine,
+      tag: obj.tag || 'DLC // CUSTOM',
+      tagClass: 'dlc',
+      title: obj.title,
+      desc: obj.desc || 'カスタムDLC追加モード',
+      config: obj
+    };
+    this.customDLCs = this.customDLCs.filter(x => x.id !== dlc.id);
+    this.customDLCs.push(dlc);
+    this.save();
+    return dlc;
+  },
+
+  getAllGames() {
+    const activeBuiltins = BUILTIN_DLCS.filter(d => this.installedIds.includes(d.id));
+    return [...CORE_GAMES, ...activeBuiltins, ...this.customDLCs];
+  }
+};
+
+// Public Global API so external <script> DLC files can also register directly!
+window.AeroMemory = {
+  registerDLC(dlcObj) {
+    DLCManager.installCustomJSON(JSON.stringify(dlcObj));
+    Hub.renderCatalog();
+  }
+};
+
+/* ==========================================================================
+   4. MULTI-GAME ENGINE CONTROLLER
+   ========================================================================== */
+const Hub = {
+  selectedGameId: 'chimp',
+  difficulty: 'standard', // standard | hard | insane
 
   init() {
-    document.querySelectorAll('.mode-card').forEach(card => {
-      card.addEventListener('click', () => {
+    DLCManager.load();
+    this.renderCatalog();
+
+    document.querySelectorAll('.diff-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
         Sound.init();
         Sound.playNote(660, 0.08, 0.1, 'sine');
-        document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-        this.mode = card.dataset.mode;
+        document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        this.difficulty = btn.dataset.diff;
       });
     });
 
-    document.getElementById('btn-start').addEventListener('click', () => this.startNewGame());
-    document.getElementById('btn-retry').addEventListener('click', () => this.startNewGame());
-    document.getElementById('btn-home').addEventListener('click', () => {
-      cancelAnimationFrame(this.timerRAF);
-      this.showScreen('screen-start');
+    document.getElementById('btn-start').addEventListener('click', () => {
+      const gameObj = DLCManager.getAllGames().find(g => g.id === this.selectedGameId) || CORE_GAMES[0];
+      Arena.start(gameObj, this.difficulty);
     });
+
+    document.getElementById('btn-retry').addEventListener('click', () => {
+      const gameObj = DLCManager.getAllGames().find(g => g.id === this.selectedGameId) || CORE_GAMES[0];
+      Arena.start(gameObj, this.difficulty);
+    });
+
+    document.getElementById('btn-home').addEventListener('click', () => Arena.abortToHub());
+    document.getElementById('btn-brand-home').addEventListener('click', () => Arena.abortToHub());
+
+    // DLC Modal Events
+    document.getElementById('btn-open-dlc').addEventListener('click', () => this.openDLCModal());
+    document.getElementById('btn-close-dlc').addEventListener('click', () => {
+      document.getElementById('dlc-modal').classList.remove('open');
+      this.renderCatalog();
+    });
+    document.getElementById('btn-install-json').addEventListener('click', () => {
+      const raw = document.getElementById('dlc-json-input').value.trim();
+      if (!raw) return;
+      try {
+        const dlc = DLCManager.installCustomJSON(raw);
+        alert(`DLC「${dlc.title}」をインストールしました！`);
+        document.getElementById('dlc-json-input').value = '';
+        this.renderDLCModalList();
+        this.renderCatalog();
+      } catch (err) {
+        alert('DLC読み込みエラー: ' + err.message);
+      }
+    });
+  },
+
+  renderCatalog() {
+    const games = DLCManager.getAllGames();
+    if (!games.some(g => g.id === this.selectedGameId)) {
+      this.selectedGameId = games[0].id;
+    }
+
+    const container = document.getElementById('game-catalog');
+    container.innerHTML = '';
+
+    games.forEach(g => {
+      const best = localStorage.getItem(`aero_best_${g.id}`) || '0';
+      const card = document.createElement('div');
+      card.className = 'game-card' + (g.id === this.selectedGameId ? ' selected' : '');
+      card.innerHTML = `
+        <div>
+          <div class="game-card-top">
+            <span class="game-tag ${g.tagClass || ''}">${g.tag}</span>
+            <span class="game-best">BEST: ${Number(best).toLocaleString()}</span>
+          </div>
+          <div class="game-title">${g.title}</div>
+          <div class="game-desc">${g.desc}</div>
+        </div>
+      `;
+      card.addEventListener('click', () => {
+        Sound.init();
+        Sound.playNote(620, 0.08, 0.1, 'sine');
+        this.selectedGameId = g.id;
+        this.renderCatalog();
+      });
+      container.appendChild(card);
+    });
+
+    const activeObj = games.find(g => g.id === this.selectedGameId);
+    if (activeObj) {
+      document.getElementById('selected-game-label').textContent = `選択中: ${activeObj.title.split('（')[0]}`;
+    }
+  },
+
+  openDLCModal() {
+    this.renderDLCModalList();
+    document.getElementById('dlc-modal').classList.add('open');
+  },
+
+  renderDLCModalList() {
+    const list = document.getElementById('dlc-preset-list');
+    list.innerHTML = '';
+
+    BUILTIN_DLCS.forEach(dlc => {
+      const installed = DLCManager.installedIds.includes(dlc.id);
+      const item = document.createElement('div');
+      item.className = 'dlc-item';
+      item.innerHTML = `
+        <div style="padding-right:10px;">
+          <div style="font-weight:800; font-size:0.88rem;">${dlc.title}</div>
+          <div style="font-size:0.74rem; color:#475569;">${dlc.desc}</div>
+        </div>
+        <button class="diff-btn ${installed ? 'active' : ''}" style="flex-shrink:0;">
+          ${installed ? '導入済み ✓' : '＋ 導入する'}
+        </button>
+      `;
+      item.querySelector('button').addEventListener('click', () => {
+        DLCManager.toggleBuiltin(dlc.id);
+        this.renderDLCModalList();
+        this.renderCatalog();
+      });
+      list.appendChild(item);
+    });
+
+    DLCManager.customDLCs.forEach(dlc => {
+      const item = document.createElement('div');
+      item.className = 'dlc-item';
+      item.innerHTML = `
+        <div style="padding-right:10px;">
+          <div style="font-weight:800; font-size:0.88rem;">${dlc.title} [CUSTOM]</div>
+          <div style="font-size:0.74rem; color:#475569;">${dlc.desc}</div>
+        </div>
+        <button class="diff-btn active insane" style="flex-shrink:0;">削除</button>
+      `;
+      item.querySelector('button').addEventListener('click', () => {
+        DLCManager.customDLCs = DLCManager.customDLCs.filter(x => x.id !== dlc.id);
+        DLCManager.save();
+        this.renderDLCModalList();
+        this.renderCatalog();
+      });
+      list.appendChild(item);
+    });
+  }
+};
+
+/* ==========================================================================
+   5. UNIFIED ARENA & 4 DISTINCT MEMORY ENGINES
+   ========================================================================== */
+const Arena = {
+  gameObj: null,
+  diff: 'standard',
+  level: 1,
+  score: 0,
+  lives: 3,
+  maxRecord: 0,
+  phase: 'idle',
+  timerRAF: null,
+  timeouts: [],
+
+  clearTimers() {
+    cancelAnimationFrame(this.timerRAF);
+    this.timeouts.forEach(t => clearTimeout(t));
+    this.timeouts = [];
+  },
+
+  later(fn, ms) {
+    const id = setTimeout(fn, ms);
+    this.timeouts.push(id);
+    return id;
   },
 
   showScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
+  },
+
+  abortToHub() {
+    this.clearTimers();
+    this.phase = 'idle';
+    document.getElementById('nback-controls').style.display = 'none';
+    Hub.renderCatalog();
+    this.showScreen('screen-start');
   },
 
   updateHUD() {
@@ -823,52 +1360,158 @@ const Game = {
     livesEl.className = this.lives === 1 ? 'stat-pill danger' : 'stat-pill lives';
   },
 
-  startNewGame() {
+  resetBoardTransform() {
+    const wrapper = document.getElementById('matrix-wrapper');
+    wrapper.style.transition = 'none';
+    wrapper.style.transform = 'rotate(0deg)';
+    void wrapper.offsetWidth;
+    wrapper.style.transition = 'transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1)';
+  },
+
+  start(gameObj, diff) {
     Sound.init();
+    this.clearTimers();
+    this.gameObj = gameObj;
+    this.diff = diff;
     this.level = 1;
     this.score = 0;
     this.lives = 3;
-    this.maxDigitsCleared = 0;
+    this.maxRecord = 0;
     this.updateHUD();
     this.showScreen('screen-game');
-    this.setupLevel();
+    document.getElementById('nback-controls').style.display = gameObj.engine === 'nback' ? 'flex' : 'none';
+    this.nextStage();
   },
 
-  setupLevel() {
-    cancelAnimationFrame(this.timerRAF);
-    this.phase = 'memorize';
+  nextStage() {
+    this.clearTimers();
+    this.resetBoardTransform();
+    const eng = this.gameObj.engine;
+    if (eng === 'chimp') ChimpEngine.setup();
+    else if (eng === 'pulse') PulseEngine.setup();
+    else if (eng === 'nback') NBackEngine.setup();
+    else if (eng === 'symbol') SymbolEngine.setup();
+  },
+
+  stageSuccess(bonus, recordVal, labelText) {
+    this.phase = 'transition';
+    this.clearTimers();
+    this.maxRecord = Math.max(this.maxRecord, recordVal);
+    this.score += bonus;
+    this.updateHUD();
+    Sound.stageClear();
+
+    const banner = document.getElementById('rule-banner');
+    banner.textContent = labelText || `CLEAR! +${bonus} PTS`;
+    banner.className = 'rule-banner clear';
+
+    this.later(() => {
+      this.level++;
+      this.updateHUD();
+      this.nextStage();
+    }, 900);
+  },
+
+  stageFail(reason, revealFn) {
+    this.phase = 'transition';
+    this.clearTimers();
+    Sound.wrong();
+
+    if (revealFn) revealFn();
+
+    const banner = document.getElementById('rule-banner');
+    banner.textContent = reason;
+    banner.className = 'rule-banner insane';
+
+    this.lives--;
+    this.updateHUD();
+
+    this.later(() => {
+      if (this.lives <= 0) {
+        this.finishGame();
+      } else {
+        this.nextStage();
+      }
+    }, 1450);
+  },
+
+  finishGame() {
+    this.clearTimers();
+    document.getElementById('nback-controls').style.display = 'none';
+    this.showScreen('screen-result');
+
+    const prevBest = Number(localStorage.getItem(`aero_best_${this.gameObj.id}`) || '0');
+    if (this.score > prevBest) {
+      localStorage.setItem(`aero_best_${this.gameObj.id}`, String(this.score));
+    }
+
+    const shortTitle = this.gameObj.title.split('（')[0];
+    document.getElementById('res-mode-badge').textContent = `${shortTitle} // ${this.diff.toUpperCase()}`;
+    document.getElementById('res-level').textContent = `LV.${String(this.level).padStart(2, '0')}`;
+    document.getElementById('res-score').textContent = this.score.toLocaleString();
+
+    const eng = this.gameObj.engine;
+    const stat2Label = eng === 'nback' ? 'MAX N-BACK' : (eng === 'pulse' ? 'MAX CHAIN' : 'MAX TILES');
+    const stat2Suffix = eng === 'nback' ? '-BACK' : '個';
+    document.getElementById('res-stat2-label').textContent = stat2Label;
+    document.getElementById('res-stat2').textContent = `${this.maxRecord}${stat2Suffix}`;
+
+    const mult = this.diff === 'insane' ? 1.35 : (this.diff === 'hard' ? 1.15 : 1.0);
+    const pts = this.score * mult;
+    let rank = 'C', sub = 'ウォームアップ完了・さらなる高みへ';
+    if (pts >= 9000) { rank = 'SSS'; sub = '人間超越・フォトグラフィックメモリ'; }
+    else if (pts >= 6000) { rank = 'S+'; sub = '驚異的なワーキングメモリ容量'; }
+    else if (pts >= 3800) { rank = 'S'; sub = 'エリートレベルの記憶処理能力'; }
+    else if (pts >= 2200) { rank = 'A'; sub = '高い集中力と正確な記憶保持'; }
+    else if (pts >= 1000) { rank = 'B'; sub = '平均以上の短期記憶スキル'; }
+
+    document.getElementById('res-rank').textContent = rank;
+    document.getElementById('res-title').textContent = sub;
+  }
+};
+
+/* ==========================================================================
+   ENGINE 1: CHIMP MATRIX (Spatial Digit Order + Reverse + Decoy + Rotation)
+   ========================================================================== */
+const ChimpEngine = {
+  gridSize: 4,
+  targetCount: 4,
+  expectedSequence: [],
+  currentIndex: 0,
+  nextRotation: 0,
+
+  setup() {
+    Arena.phase = 'memorize';
     this.currentIndex = 0;
+    const cfg = Arena.gameObj.config || {};
 
-    if (this.level <= 2) this.gridSize = 4;
-    else if (this.level <= 5) this.gridSize = 5;
-    else this.gridSize = 6;
-
+    this.gridSize = cfg.gridSize || (Arena.level <= 2 ? 4 : (Arena.level <= 5 ? 5 : 6));
     const maxCells = this.gridSize * this.gridSize;
-    this.targetCount = Math.min(maxCells - 2, 3 + this.level);
+    this.targetCount = Math.min(maxCells - 2, (cfg.startDigits || 3) + Arena.level);
 
-    // Special rules
     let isReverse = false;
-    let decoyCount = 0;
+    let decoyCount = cfg.extraDecoys || 0;
     this.nextRotation = 0;
 
-    if (this.mode === 'standard') {
-      if (this.level >= 4 && this.level % 2 === 0) isReverse = true;
-      if (this.level >= 6) decoyCount = Math.min(3, Math.floor((this.level - 4) / 2));
-    } else if (this.mode === 'rotation') {
+    if (Arena.diff === 'standard') {
+      if (Arena.level >= 4 && Arena.level % 2 === 0) isReverse = true;
+      if (Arena.level >= 6) decoyCount += Math.min(3, Math.floor((Arena.level - 4) / 2));
+    } else if (Arena.diff === 'hard') {
       const angles = [90, -90, 180];
       this.nextRotation = angles[Math.floor(Math.random() * angles.length)];
-      if (this.level >= 5 && this.level % 2 === 1) isReverse = true;
-    } else if (this.mode === 'chaos') {
-      isReverse = (this.level % 2 === 0);
-      decoyCount = Math.min(4, 1 + Math.floor(this.level / 2));
+      if (Arena.level >= 3 && Arena.level % 2 === 1) isReverse = true;
+    } else if (Arena.diff === 'insane') {
+      isReverse = (Arena.level % 2 === 0);
+      decoyCount += Math.min(4, 1 + Math.floor(Arena.level / 2));
       const angles = [90, -90, 180];
       this.nextRotation = angles[Math.floor(Math.random() * angles.length)];
     }
 
+    if (cfg.forceRotate) this.nextRotation = cfg.forceRotate;
+
     const nums = Array.from({ length: this.targetCount }, (_, i) => i + 1);
     this.expectedSequence = isReverse ? [...nums].reverse() : [...nums];
 
-    // Pick random unique cell positions
     const indices = Array.from({ length: maxCells }, (_, i) => i);
     for (let i = indices.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -876,38 +1519,24 @@ const Game = {
     }
 
     const cellMap = new Map();
-    nums.forEach((num, idx) => {
-      cellMap.set(indices[idx], { value: num, isDecoy: false });
-    });
-
+    nums.forEach((num, idx) => cellMap.set(indices[idx], { value: num, isDecoy: false }));
     for (let d = 0; d < decoyCount; d++) {
-      const cellIdx = indices[this.targetCount + d];
-      if (cellIdx !== undefined) {
-        const fakeNum = Math.floor(Math.random() * 9) + 1;
-        cellMap.set(cellIdx, { value: fakeNum, isDecoy: true });
+      const idx = indices[this.targetCount + d];
+      if (idx !== undefined) {
+        cellMap.set(idx, { value: Math.floor(Math.random() * 9) + 1, isDecoy: true });
       }
     }
 
-    // Reset wrapper rotation cleanly
-    const wrapper = document.getElementById('matrix-wrapper');
-    wrapper.style.transition = 'none';
-    wrapper.style.transform = 'rotate(0deg)';
-    void wrapper.offsetWidth;
-    wrapper.style.transition = 'transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1)';
-
-    // Update Banner & Phase Indicator
-    document.getElementById('phase-indicator').textContent = 'MEMORIZE PHASE // 記憶フェーズ';
+    document.getElementById('phase-indicator').textContent = 'MEMORIZE PHASE // 位置と数字を記憶';
     const banner = document.getElementById('rule-banner');
-    let bannerText = isReverse
-      ? `【逆順】 ${this.targetCount} → 1 の順にタップせよ！`
-      : `【昇順】 1 → ${this.targetCount} の順にタップせよ`;
-    if (decoyCount > 0) bannerText += `（赤数字は罠！）`;
-    if (this.nextRotation !== 0) bannerText += ` ＋ 回転あり`;
+    let text = isReverse
+      ? `【逆順】 ${this.targetCount} → 1 の順にタップ！`
+      : `【昇順】 1 → ${this.targetCount} の順にタップ`;
+    if (decoyCount > 0) text += '（赤数字は罠）';
+    if (this.nextRotation !== 0) text += ' ＋ 回転';
+    banner.textContent = text;
+    banner.className = 'rule-banner' + (Arena.diff === 'insane' ? ' insane' : (isReverse ? ' reverse' : ''));
 
-    banner.textContent = bannerText;
-    banner.className = 'rule-banner' + (this.mode === 'chaos' ? ' insane' : (isReverse ? ' reverse' : ''));
-
-    // Render Grid with explicit square rows & columns
     const gridEl = document.getElementById('matrix-grid');
     gridEl.style.gridTemplateColumns = `repeat(${this.gridSize}, 1fr)`;
     gridEl.style.gridTemplateRows = `repeat(${this.gridSize}, 1fr)`;
@@ -934,197 +1563,566 @@ const Game = {
       cell.appendChild(inner);
       cell.addEventListener('pointerdown', (e) => {
         e.preventDefault();
-        this.handleCellTap(cell, e);
+        this.onTap(cell, e);
       });
       gridEl.appendChild(cell);
     }
 
-    // Memorization countdown timer
-    const baseTime = this.mode === 'chaos' ? 1800 : 2300;
-    const memorizeDuration = Math.max(1400, baseTime + this.targetCount * 380 - this.level * 50);
+    const baseTime = cfg.fastMem || Arena.diff === 'insane' ? 1600 : 2200;
+    const duration = Math.max(1200, baseTime + this.targetCount * 360 - Arena.level * 50);
     const startT = performance.now();
-    const timerFill = document.getElementById('timer-fill');
+    const fill = document.getElementById('timer-fill');
 
-    const tickMemorize = (now) => {
-      if (this.phase !== 'memorize') return;
-      const elapsed = now - startT;
-      const pct = Math.max(0, 100 - (elapsed / memorizeDuration) * 100);
-      timerFill.style.width = `${pct}%`;
-
-      if (elapsed >= memorizeDuration) {
-        this.concealBoard(null);
-      } else {
-        this.timerRAF = requestAnimationFrame(tickMemorize);
-      }
+    const tick = (now) => {
+      if (Arena.phase !== 'memorize') return;
+      const pct = Math.max(0, 100 - ((now - startT) / duration) * 100);
+      fill.style.width = `${pct}%`;
+      if (now - startT >= duration) this.conceal(null);
+      else Arena.timerRAF = requestAnimationFrame(tick);
     };
-    this.timerRAF = requestAnimationFrame(tickMemorize);
+    Arena.timerRAF = requestAnimationFrame(tick);
   },
 
-  // Conceal board (optionally triggered immediately when player taps first tile!)
-  concealBoard(firstTappedCell) {
-    if (this.phase !== 'memorize') return;
-    cancelAnimationFrame(this.timerRAF);
-    this.phase = 'recall';
+  conceal(firstCell) {
+    if (Arena.phase !== 'memorize') return;
+    cancelAnimationFrame(Arena.timerRAF);
+    Arena.phase = 'recall';
     Sound.hide();
-
     document.getElementById('phase-indicator').textContent = 'RECALL PHASE // 解答フェーズ';
 
-    document.querySelectorAll('.cell.visible').forEach(cell => {
-      if (cell !== firstTappedCell) {
-        cell.classList.remove('visible', 'decoy');
-        cell.classList.add('hidden-tile');
+    document.querySelectorAll('.cell.visible').forEach(c => {
+      if (c !== firstCell) {
+        c.classList.remove('visible', 'decoy');
+        c.classList.add('hidden-tile');
       }
     });
 
-    // Apply rotation if scheduled for this level!
     if (this.nextRotation !== 0) {
       const deg = this.nextRotation;
-      setTimeout(() => {
+      Arena.later(() => {
         Sound.rotate();
-        const wrapper = document.getElementById('matrix-wrapper');
-        wrapper.style.transform = `rotate(${deg}deg)`;
+        document.getElementById('matrix-wrapper').style.transform = `rotate(${deg}deg)`;
         document.querySelectorAll('.cell-inner').forEach(el => {
           el.style.transform = `rotate(${-deg}deg)`;
         });
       }, 80);
     }
 
-    // Recall phase time limit
-    const recallLimit = Math.max(4500, 5000 + this.targetCount * 1150);
+    const limit = Math.max(4500, 5000 + this.targetCount * 1100);
     const startT = performance.now();
-    const timerFill = document.getElementById('timer-fill');
+    const fill = document.getElementById('timer-fill');
 
-    const tickRecall = (now) => {
-      if (this.phase !== 'recall') return;
-      const elapsed = now - startT;
-      const pct = Math.max(0, 100 - (elapsed / recallLimit) * 100);
-      timerFill.style.width = `${pct}%`;
-
-      if (elapsed >= recallLimit) {
-        this.handleMistake(null, 'TIME UP!');
+    const tick = (now) => {
+      if (Arena.phase !== 'recall') return;
+      const pct = Math.max(0, 100 - ((now - startT) / limit) * 100);
+      fill.style.width = `${pct}%`;
+      if (now - startT >= limit) {
+        Arena.stageFail('TIME UP!', () => this.revealAll());
       } else {
-        this.timerRAF = requestAnimationFrame(tickRecall);
+        Arena.timerRAF = requestAnimationFrame(tick);
       }
     };
-    this.timerRAF = requestAnimationFrame(tickRecall);
+    Arena.timerRAF = requestAnimationFrame(tick);
   },
 
-  handleCellTap(cell, event) {
-    // Ignore taps on empty background cells (val === 0)
+  onTap(cell, e) {
     const val = parseInt(cell.dataset.val, 10);
     if (val === 0) return;
-
-    // If tapped during memorize phase, conceal other tiles AND trigger rotation + recall timer properly
-    if (this.phase === 'memorize') {
-      this.concealBoard(cell);
-    }
-
-    if (this.phase !== 'recall') return;
-    if (cell.classList.contains('solved')) return;
+    if (Arena.phase === 'memorize') this.conceal(cell);
+    if (Arena.phase !== 'recall' || cell.classList.contains('solved')) return;
 
     const isDecoy = cell.dataset.decoy === '1';
     const expected = this.expectedSequence[this.currentIndex];
 
     if (!isDecoy && val === expected) {
-      // Correct!
       cell.classList.remove('hidden-tile', 'visible');
       cell.classList.add('solved');
       Sound.step(this.currentIndex);
-      emitBurst(event.clientX, event.clientY, ['#0ea5e9', '#10b981', '#34d399']);
-
-      this.score += 100 * this.level;
+      emitBurst(e.clientX, e.clientY);
+      Arena.score += 100 * Arena.level;
+      Arena.updateHUD();
       this.currentIndex++;
-      this.updateHUD();
 
       if (this.currentIndex >= this.expectedSequence.length) {
-        this.phase = 'transition';
-        cancelAnimationFrame(this.timerRAF);
-        this.maxDigitsCleared = Math.max(this.maxDigitsCleared, this.targetCount);
-        this.score += 250 * this.level;
-        this.updateHUD();
-        Sound.stageClear();
-
-        const banner = document.getElementById('rule-banner');
-        banner.textContent = `CLEAR! +${250 * this.level} BONUS`;
-        banner.className = 'rule-banner clear';
-
-        setTimeout(() => {
-          this.level++;
-          this.updateHUD();
-          this.setupLevel();
-        }, 850);
+        Arena.stageSuccess(250 * Arena.level, this.targetCount);
       }
     } else {
-      // Wrong tile or Decoy trap!
-      const msg = isDecoy
-        ? 'TRAP TRIGGERED!（赤い罠数字）'
-        : `SEQUENCE ERROR!（次は「${expected}」をタップ）`;
-      this.handleMistake(cell, msg);
+      cell.classList.remove('hidden-tile', 'visible');
+      cell.classList.add('wrong');
+      const msg = isDecoy ? 'TRAP TRIGGERED!（赤い罠数字）' : `SEQUENCE ERROR!（次は「${expected}」）`;
+      Arena.stageFail(msg, () => this.revealAll());
     }
   },
 
-  handleMistake(cell, reason) {
-    this.phase = 'transition';
-    cancelAnimationFrame(this.timerRAF);
-    Sound.wrong();
-
-    if (cell) {
-      cell.classList.remove('hidden-tile', 'visible');
-      cell.classList.add('wrong');
-    }
-
-    // Reveal all remaining hidden tiles
+  revealAll() {
     document.querySelectorAll('.cell.hidden-tile').forEach(c => {
       c.classList.remove('hidden-tile');
       c.classList.add('visible');
       if (c.dataset.decoy === '1') c.classList.add('decoy');
     });
-
-    const banner = document.getElementById('rule-banner');
-    banner.textContent = reason;
-    banner.className = 'rule-banner insane';
-
-    this.lives--;
-    this.updateHUD();
-
-    setTimeout(() => {
-      if (this.lives <= 0) {
-        this.showResults();
-      } else {
-        this.setupLevel();
-      }
-    }, 1500);
-  },
-
-  showResults() {
-    this.showScreen('screen-result');
-
-    const modeNames = {
-      standard: 'STANDARD PROTOCOL',
-      rotation: 'HARD // SPATIAL ROTATION',
-      chaos: 'INSANE // CHAOS MATRIX'
-    };
-    document.getElementById('res-mode-badge').textContent = modeNames[this.mode];
-    document.getElementById('res-level').textContent = `LV.${String(this.level).padStart(2, '0')}`;
-    document.getElementById('res-digits').textContent = `${this.maxDigitsCleared}個`;
-    document.getElementById('res-score').textContent = this.score.toLocaleString();
-
-    const mult = this.mode === 'chaos' ? 1.4 : (this.mode === 'rotation' ? 1.2 : 1.0);
-    const effective = this.maxDigitsCleared * mult;
-
-    let rank = 'C', subtitle = 'ウォームアップ完了・さらなる高みへ';
-    if (effective >= 11) { rank = 'SSS'; subtitle = '人間超越・フォトグラフィックメモリ'; }
-    else if (effective >= 9) { rank = 'S+'; subtitle = '驚異的なワーキングメモリ容量'; }
-    else if (effective >= 7.5) { rank = 'S'; subtitle = 'エリートレベルの空間記憶力'; }
-    else if (effective >= 6) { rank = 'A'; subtitle = '高い集中力と正確な座標記憶'; }
-    else if (effective >= 4.5) { rank = 'B'; subtitle = '平均以上の短期記憶スキル'; }
-
-    document.getElementById('res-rank').textContent = rank;
-    document.getElementById('res-title').textContent = subtitle;
   }
 };
 
-Game.init();
+/* ==========================================================================
+   ENGINE 2: SEQUENCE PULSE (Simon Light & Tone Memory + Reverse + Filter)
+   ========================================================================== */
+const PulseEngine = {
+  gridSize: 3,
+  rawSequence: [],
+  expectedSequence: [],
+  inputIndex: 0,
+
+  setup() {
+    Arena.phase = 'watch';
+    this.inputIndex = 0;
+    const cfg = Arena.gameObj.config || {};
+    this.gridSize = cfg.gridSize || (Arena.diff === 'insane' && Arena.level >= 4 ? 4 : 3);
+    const totalPads = this.gridSize * this.gridSize;
+    const chainLen = Math.min(18, 3 + Arena.level);
+
+    const isReverse = (Arena.diff === 'hard' && Arena.level % 2 === 0) || (Arena.diff === 'insane' && Arena.level % 2 === 1);
+    const useRedFilter = (Arena.diff === 'insane' && Arena.level >= 2) || (Arena.diff === 'hard' && Arena.level >= 4);
+
+    this.rawSequence = [];
+    this.expectedSequence = [];
+
+    for (let i = 0; i < chainLen; i++) {
+      const padIdx = Math.floor(Math.random() * totalPads);
+      // Red flash is a distractor to ignore (ensure at least 3 valid flashes exist)
+      const isRed = useRedFilter && i > 0 && this.expectedSequence.length >= 2 && Math.random() < 0.25;
+      this.rawSequence.push({ padIdx, isRed });
+      if (!isRed) this.expectedSequence.push(padIdx);
+    }
+
+    if (isReverse) this.expectedSequence.reverse();
+
+    document.getElementById('phase-indicator').textContent = 'WATCH SEQUENCE // 発光パターンを記憶';
+    const banner = document.getElementById('rule-banner');
+    let msg = isReverse ? '【逆順】 光った順番の「逆」にタップ！' : '【正順】 光った順番通りにタップせよ';
+    if (useRedFilter) msg += '（赤発光は無視！）';
+    banner.textContent = msg;
+    banner.className = 'rule-banner' + (useRedFilter ? ' insane' : (isReverse ? ' reverse' : ''));
+
+    const gridEl = document.getElementById('matrix-grid');
+    gridEl.style.gridTemplateColumns = `repeat(${this.gridSize}, 1fr)`;
+    gridEl.style.gridTemplateRows = `repeat(${this.gridSize}, 1fr)`;
+    gridEl.innerHTML = '';
+
+    const pads = [];
+    for (let i = 0; i < totalPads; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell pulse-pad';
+      cell.dataset.idx = String(i);
+      cell.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.onPadTap(i, cell, e);
+      });
+      gridEl.appendChild(cell);
+      pads.push(cell);
+    }
+
+    const fill = document.getElementById('timer-fill');
+    fill.style.width = '100%';
+
+    const interval = Math.max(290, (cfg.fastPulse || Arena.diff === 'insane' ? 440 : 580) - Arena.level * 18);
+    const litTime = Math.floor(interval * 0.65);
+
+    this.rawSequence.forEach((step, idx) => {
+      Arena.later(() => {
+        const pad = pads[step.padIdx];
+        const cls = step.isRed ? 'pulse-lit-red' : (idx % 2 === 0 ? 'pulse-lit-blue' : 'pulse-lit-green');
+        pad.classList.add(cls);
+        if (step.isRed) Sound.playNote(220, 0.18, 0.14, 'sawtooth');
+        else Sound.pad(step.padIdx);
+
+        Arena.later(() => pad.classList.remove(cls), litTime);
+      }, 500 + idx * interval);
+    });
+
+    const totalWatchMs = 550 + this.rawSequence.length * interval;
+    Arena.later(() => {
+      Arena.phase = 'recall';
+      document.getElementById('phase-indicator').textContent = `RECALL PHASE // 残り ${this.expectedSequence.length} タップ`;
+      this.startRecallTimer();
+    }, totalWatchMs);
+  },
+
+  startRecallTimer() {
+    const limit = Math.max(5000, 4500 + this.expectedSequence.length * 1000);
+    const startT = performance.now();
+    const fill = document.getElementById('timer-fill');
+
+    const tick = (now) => {
+      if (Arena.phase !== 'recall') return;
+      const pct = Math.max(0, 100 - ((now - startT) / limit) * 100);
+      fill.style.width = `${pct}%`;
+      if (now - startT >= limit) Arena.stageFail('TIME UP!');
+      else Arena.timerRAF = requestAnimationFrame(tick);
+    };
+    Arena.timerRAF = requestAnimationFrame(tick);
+  },
+
+  onPadTap(idx, cell, e) {
+    if (Arena.phase !== 'recall') return;
+    const expected = this.expectedSequence[this.inputIndex];
+
+    if (idx === expected) {
+      cell.classList.add('pulse-lit-green');
+      Arena.later(() => cell.classList.remove('pulse-lit-green'), 180);
+      Sound.pad(idx);
+      emitBurst(e.clientX, e.clientY, ['#10b981', '#0ea5e9']);
+
+      Arena.score += 110 * Arena.level;
+      Arena.updateHUD();
+      this.inputIndex++;
+      document.getElementById('phase-indicator').textContent =
+        `RECALL PHASE // 残り ${this.expectedSequence.length - this.inputIndex} タップ`;
+
+      if (this.inputIndex >= this.expectedSequence.length) {
+        Arena.stageSuccess(280 * Arena.level, this.expectedSequence.length);
+      }
+    } else {
+      cell.classList.add('wrong');
+      Arena.stageFail('PATTERN MISMATCH!');
+    }
+  }
+};
+
+/* ==========================================================================
+   ENGINE 3: DUAL N-BACK (Working Memory Position + Letter Matching)
+   ========================================================================== */
+const NBackEngine = {
+  nLevel: 2,
+  steps: [],
+  currentStep: 0,
+  totalSteps: 12,
+  posPressed: false,
+  letPressed: false,
+  stepCorrect: 0,
+
+  setup() {
+    Arena.phase = 'nback';
+    this.nLevel = Arena.diff === 'insane' ? Math.min(4, 2 + Math.floor(Arena.level / 2)) : (Arena.diff === 'hard' ? 2 + Math.floor(Arena.level / 3) : Math.min(3, 1 + Math.floor(Arena.level / 2)));
+    this.totalSteps = 9 + this.nLevel * 2;
+    this.currentStep = 0;
+    this.stepCorrect = 0;
+
+    const letters = ['C', 'H', 'K', 'L', 'Q', 'R', 'S', 'T'];
+    this.steps = [];
+
+    for (let i = 0; i < this.totalSteps; i++) {
+      let pos = Math.floor(Math.random() * 9);
+      let letChar = letters[Math.floor(Math.random() * letters.length)];
+
+      // Guarantee ~32% match probability once i >= nLevel
+      if (i >= this.nLevel) {
+        if (Math.random() < 0.32) pos = this.steps[i - this.nLevel].pos;
+        if (Math.random() < 0.32) letChar = this.steps[i - this.nLevel].letChar;
+      }
+      this.steps.push({ pos, letChar });
+    }
+
+    document.getElementById('phase-indicator').textContent = `DUAL ${this.nLevel}-BACK // ${this.nLevel}回前と比較`;
+    const banner = document.getElementById('rule-banner');
+    banner.textContent = `【${this.nLevel}回前】と「位置」または「文字」が同じなら押せ！`;
+    banner.className = 'rule-banner' + (this.nLevel >= 3 ? ' insane' : ' reverse');
+
+    const gridEl = document.getElementById('matrix-grid');
+    gridEl.style.gridTemplateColumns = 'repeat(3, 1fr)';
+    gridEl.style.gridTemplateRows = 'repeat(3, 1fr)';
+    gridEl.innerHTML = '';
+
+    for (let i = 0; i < 9; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell pulse-pad';
+      cell.id = `nback-cell-${i}`;
+      gridEl.appendChild(cell);
+    }
+
+    const btnPos = document.getElementById('btn-match-pos');
+    const btnLet = document.getElementById('btn-match-let');
+    btnPos.onclick = () => this.pressMatch('pos');
+    btnLet.onclick = () => this.pressMatch('let');
+
+    this.runStep();
+  },
+
+  pressMatch(type) {
+    if (Arena.phase !== 'nback') return;
+    if (this.currentStep < this.nLevel) return; // Cannot match before N steps elapsed
+
+    if (type === 'pos' && !this.posPressed) {
+      this.posPressed = true;
+      document.getElementById('btn-match-pos').classList.add('pressed');
+      Sound.playNote(660, 0.1, 0.12, 'sine');
+    } else if (type === 'let' && !this.letPressed) {
+      this.letPressed = true;
+      document.getElementById('btn-match-let').classList.add('pressed');
+      Sound.playNote(784, 0.1, 0.12, 'sine');
+    }
+  },
+
+  runStep() {
+    if (Arena.phase !== 'nback') return;
+
+    if (this.currentStep >= this.totalSteps) {
+      Arena.stageSuccess(350 * this.nLevel, this.nLevel, `${this.nLevel}-BACK CLEAR!`);
+      return;
+    }
+
+    this.posPressed = false;
+    this.letPressed = false;
+    const btnPos = document.getElementById('btn-match-pos');
+    const btnLet = document.getElementById('btn-match-let');
+    btnPos.className = 'btn-nback';
+    btnLet.className = 'btn-nback';
+
+    const cur = this.steps[this.currentStep];
+    const cell = document.getElementById(`nback-cell-${cur.pos}`);
+    cell.classList.add('pulse-lit-blue');
+    cell.innerHTML = `<span class="nback-letter">${cur.letChar}</span>`;
+    Sound.pad(cur.pos);
+
+    document.getElementById('phase-indicator').textContent =
+      `DUAL ${this.nLevel}-BACK // STEP ${this.currentStep + 1} / ${this.totalSteps}`;
+
+    const stepMs = Arena.diff === 'insane' ? 1950 : 2350;
+    const startT = performance.now();
+    const fill = document.getElementById('timer-fill');
+
+    const tick = (now) => {
+      if (Arena.phase !== 'nback') return;
+      const pct = Math.max(0, 100 - ((now - startT) / stepMs) * 100);
+      fill.style.width = `${pct}%`;
+      if (now - startT < stepMs) {
+        Arena.timerRAF = requestAnimationFrame(tick);
+      }
+    };
+    Arena.timerRAF = requestAnimationFrame(tick);
+
+    // Hide stimulus midway
+    Arena.later(() => {
+      cell.classList.remove('pulse-lit-blue');
+      cell.innerHTML = '';
+    }, Math.floor(stepMs * 0.62));
+
+    // Evaluate step at end of interval
+    Arena.later(() => {
+      if (Arena.phase !== 'nback') return;
+      if (this.currentStep >= this.nLevel) {
+        const prev = this.steps[this.currentStep - this.nLevel];
+        const posMatch = cur.pos === prev.pos;
+        const letMatch = cur.letChar === prev.letChar;
+
+        let ok = true;
+        if (this.posPressed !== posMatch) {
+          ok = false;
+          btnPos.classList.add('hit-bad');
+        } else if (posMatch) {
+          btnPos.classList.add('hit-ok');
+        }
+
+        if (this.letPressed !== letMatch) {
+          ok = false;
+          btnLet.classList.add('hit-bad');
+        } else if (letMatch) {
+          btnLet.classList.add('hit-ok');
+        }
+
+        if (!ok) {
+          Arena.stageFail(`N-BACK MISS!（${this.nLevel}回前と不一致）`);
+          return;
+        }
+        Arena.score += 120 * this.nLevel;
+        Arena.updateHUD();
+      }
+      this.currentStep++;
+      this.runStep();
+    }, stepMs);
+  }
+};
+
+/* ==========================================================================
+   ENGINE 4: FLASH SYMBOL MATRIX (Color + Shape Attribute Recall)
+   ========================================================================== */
+const SymbolEngine = {
+  gridSize: 4,
+  targetIndices: new Set(),
+  foundCount: 0,
+
+  setup() {
+    Arena.phase = 'memorize';
+    this.targetIndices = new Set();
+    this.foundCount = 0;
+
+    this.gridSize = Arena.level <= 3 ? 4 : 5;
+    const maxCells = this.gridSize * this.gridSize;
+    const itemCount = Math.min(maxCells - 2, 5 + Arena.level);
+
+    const colors = [
+      { key: 'blue', name: '青', cls: 'sym-blue' },
+      { key: 'green', name: '緑', cls: 'sym-green' },
+      { key: 'amber', name: '黄', cls: 'sym-amber' },
+      { key: 'violet', name: '紫', cls: 'sym-violet' }
+    ];
+    const shapes = [
+      { key: 'tri', char: '▲', name: '三角' },
+      { key: 'cir', char: '●', name: '丸' },
+      { key: 'sqr', char: '■', name: '四角' },
+      { key: 'dia', char: '◆', name: 'ダイヤ' }
+    ];
+
+    const indices = Array.from({ length: maxCells }, (_, i) => i);
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+
+    const items = [];
+    for (let i = 0; i < itemCount; i++) {
+      const c = colors[Math.floor(Math.random() * colors.length)];
+      const s = shapes[Math.floor(Math.random() * shapes.length)];
+      items.push({ cellIdx: indices[i], color: c, shape: s });
+    }
+
+    // Pick query condition from existing items so there is always at least 1-4 targets
+    const sample = items[0];
+    const queryMode = Arena.diff === 'standard' ? 'color' : (Math.random() < 0.5 ? 'color' : 'shape');
+    let promptText = '';
+
+    items.forEach(it => {
+      if (queryMode === 'color' && it.color.key === sample.color.key) {
+        this.targetIndices.add(it.cellIdx);
+      } else if (queryMode === 'shape' && it.shape.key === sample.shape.key) {
+        this.targetIndices.add(it.cellIdx);
+      }
+    });
+
+    if (queryMode === 'color') {
+      promptText = `【${sample.color.name}色の記号】をすべて開け！（全${this.targetIndices.size}個）`;
+    } else {
+      promptText = `【${sample.shape.name}（${sample.shape.char}）】をすべて開け！（全${this.targetIndices.size}個）`;
+    }
+
+    document.getElementById('phase-indicator').textContent = 'MEMORIZE PHASE // 色と形を同時に記憶';
+    const banner = document.getElementById('rule-banner');
+    banner.textContent = '色と図形の配置を記憶せよ！';
+    banner.className = 'rule-banner';
+
+    const itemMap = new Map(items.map(it => [it.cellIdx, it]));
+    const gridEl = document.getElementById('matrix-grid');
+    gridEl.style.gridTemplateColumns = `repeat(${this.gridSize}, 1fr)`;
+    gridEl.style.gridTemplateRows = `repeat(${this.gridSize}, 1fr)`;
+    gridEl.innerHTML = '';
+
+    for (let i = 0; i < maxCells; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      const inner = document.createElement('div');
+      inner.className = 'cell-inner';
+
+      if (itemMap.has(i)) {
+        const it = itemMap.get(i);
+        cell.classList.add('visible');
+        inner.innerHTML = `<span class="${it.color.cls}" style="font-size:1.5em;">${it.shape.char}</span>`;
+        cell.dataset.hasItem = '1';
+      } else {
+        cell.dataset.hasItem = '0';
+      }
+
+      cell.dataset.idx = String(i);
+      cell.appendChild(inner);
+      cell.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.onTap(i, cell, e);
+      });
+      gridEl.appendChild(cell);
+    }
+
+    const memDuration = Math.max(1600, (Arena.diff === 'insane' ? 2000 : 2700) + itemCount * 220);
+    const startT = performance.now();
+    const fill = document.getElementById('timer-fill');
+
+    const tick = (now) => {
+      if (Arena.phase !== 'memorize') return;
+      const pct = Math.max(0, 100 - ((now - startT) / memDuration) * 100);
+      fill.style.width = `${pct}%`;
+      if (now - startT >= memDuration) {
+        Arena.phase = 'recall';
+        Sound.hide();
+        document.getElementById('phase-indicator').textContent = 'RECALL PHASE // 条件に合うパネルを開放';
+        banner.textContent = promptText;
+        banner.className = 'rule-banner reverse';
+        document.querySelectorAll('.cell.visible').forEach(c => {
+          c.classList.remove('visible');
+          c.classList.add('hidden-tile');
+        });
+        this.startRecallTimer();
+      } else {
+        Arena.timerRAF = requestAnimationFrame(tick);
+      }
+    };
+    Arena.timerRAF = requestAnimationFrame(tick);
+  },
+
+  startRecallTimer() {
+    const limit = 7500;
+    const startT = performance.now();
+    const fill = document.getElementById('timer-fill');
+
+    const tick = (now) => {
+      if (Arena.phase !== 'recall') return;
+      const pct = Math.max(0, 100 - ((now - startT) / limit) * 100);
+      fill.style.width = `${pct}%`;
+      if (now - startT >= limit) {
+        Arena.stageFail('TIME UP!', () => this.revealAll());
+      } else {
+        Arena.timerRAF = requestAnimationFrame(tick);
+      }
+    };
+    Arena.timerRAF = requestAnimationFrame(tick);
+  },
+
+  onTap(idx, cell, e) {
+    if (Arena.phase !== 'recall') return;
+    if (cell.classList.contains('solved')) return;
+
+    if (this.targetIndices.has(idx)) {
+      cell.classList.remove('hidden-tile');
+      cell.classList.add('solved');
+      Sound.step(this.foundCount);
+      emitBurst(e.clientX, e.clientY, ['#10b981', '#0ea5e9']);
+
+      this.foundCount++;
+      Arena.score += 140 * Arena.level;
+      Arena.updateHUD();
+
+      if (this.foundCount >= this.targetIndices.size) {
+        Arena.stageSuccess(260 * Arena.level, this.targetIndices.size);
+      }
+    } else {
+      cell.classList.remove('hidden-tile');
+      cell.classList.add('wrong');
+      Arena.stageFail('WRONG ATTRIBUTE!（条件と違うパネル）', () => this.revealAll());
+    }
+  },
+
+  revealAll() {
+    document.querySelectorAll('.cell.hidden-tile').forEach(c => {
+      c.classList.remove('hidden-tile');
+      c.classList.add('visible');
+    });
+  }
+};
+
+// Keyboard shortcuts for Dual N-Back on PC
+window.addEventListener('keydown', (e) => {
+  if (Arena.phase !== 'nback') return;
+  if (e.key === 'a' || e.key === 'A' || e.key === 'ArrowLeft') NBackEngine.pressMatch('pos');
+  if (e.key === 'l' || e.key === 'L' || e.key === 'ArrowRight') NBackEngine.pressMatch('let');
+});
+
+Hub.init();
 </script>
 </body>
 </html>

@@ -10,8 +10,8 @@
   :root {
     --bg-main: #f4f8fb;
     --bg-gradient: linear-gradient(135deg, #f8fbff 0%, #ebf5f9 50%, #eefaf4 100%);
-    --card-bg: rgba(255, 255, 255, 0.88);
-    --card-border: rgba(14, 165, 233, 0.22);
+    --card-bg: rgba(255, 255, 255, 0.92);
+    --card-border: rgba(14, 165, 233, 0.25);
     --text-primary: #0f172a;
     --text-secondary: #475569;
     --text-muted: #94a3b8;
@@ -22,7 +22,6 @@
     --emerald: #059669;
     --emerald-bright: #10b981;
     --emerald-soft: #d1fae5;
-    --teal: #0d9488;
     --amber: #d97706;
     --amber-soft: #fef3c7;
     --rose: #e11d48;
@@ -54,7 +53,6 @@
     overflow: hidden;
   }
 
-  /* Subtle Architectural Dot Grid */
   .bg-dots {
     position: fixed;
     inset: 0;
@@ -82,7 +80,7 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    padding: 14px;
+    padding: 12px;
   }
 
   /* Top Navigation Bar */
@@ -90,28 +88,29 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 18px;
+    padding: 10px 16px;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 16px;
     box-shadow: var(--shadow-sm);
     backdrop-filter: blur(12px);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
   }
 
   .brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-weight: 800;
-    font-size: 1.05rem;
+    font-size: 0.98rem;
     letter-spacing: -0.02em;
     color: var(--text-primary);
   }
 
   .brand-dot {
-    width: 11px;
-    height: 11px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--blue-bright), var(--emerald-bright));
     box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
@@ -120,14 +119,14 @@
   .hud-stats {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 8px;
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 700;
   }
 
   .stat-pill {
-    padding: 5px 11px;
+    padding: 4px 10px;
     border-radius: 99px;
     background: var(--blue-soft);
     color: var(--blue);
@@ -164,11 +163,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    padding: 18px;
     opacity: 0;
     pointer-events: none;
     transform: translateY(8px);
-    transition: opacity 0.28s ease, transform 0.28s ease;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    overflow-y: auto;
   }
 
   .screen.active {
@@ -182,18 +182,18 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 14px;
+    padding: 5px 14px;
     border-radius: 99px;
     background: var(--emerald-soft);
     color: var(--emerald);
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 0.06em;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
 
   .hero-title {
-    font-size: clamp(1.9rem, 5vw, 2.9rem);
+    font-size: clamp(1.75rem, 5vw, 2.7rem);
     font-weight: 800;
     text-align: center;
     letter-spacing: -0.03em;
@@ -201,16 +201,16 @@
     background: linear-gradient(135deg, #0f172a 15%, #0284c7 60%, #059669 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   .hero-desc {
     color: var(--text-secondary);
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     text-align: center;
     max-width: 480px;
-    line-height: 1.6;
-    margin-bottom: 24px;
+    line-height: 1.55;
+    margin-bottom: 18px;
   }
 
   /* Mode Selector Cards */
@@ -218,16 +218,16 @@
     width: 100%;
     max-width: 560px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
-    gap: 12px;
-    margin-bottom: 26px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
   }
 
   .mode-card {
     background: #ffffff;
     border: 2px solid #e2e8f0;
     border-radius: 16px;
-    padding: 14px;
+    padding: 12px;
     text-align: left;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -248,13 +248,13 @@
   .mode-tag {
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 700;
     padding: 2px 8px;
     border-radius: 6px;
     background: var(--blue-soft);
     color: var(--blue);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .mode-card.hard .mode-tag {
@@ -269,26 +269,26 @@
 
   .mode-name {
     font-weight: 800;
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--text-primary);
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
 
   .mode-sub {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     color: var(--text-secondary);
     line-height: 1.4;
   }
 
-  /* Primary Button */
+  /* Buttons */
   .btn-primary {
     background: linear-gradient(135deg, var(--blue) 0%, var(--emerald) 100%);
     color: #ffffff;
     border: none;
     border-radius: 14px;
-    padding: 16px 40px;
+    padding: 15px 38px;
     font-family: var(--font-sans);
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 800;
     letter-spacing: 0.04em;
     cursor: pointer;
@@ -310,9 +310,9 @@
     color: var(--text-primary);
     border: 1.5px solid #cbd5e1;
     border-radius: 14px;
-    padding: 14px 28px;
+    padding: 13px 26px;
     font-family: var(--font-sans);
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -326,36 +326,56 @@
   /* Game Stage */
   .stage-header {
     width: 100%;
-    max-width: 500px;
+    max-width: 460px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
+    flex-shrink: 0;
+  }
+
+  .phase-indicator {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
   }
 
   .rule-banner {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    padding: 7px 16px;
+    padding: 8px 18px;
     border-radius: 12px;
-    font-size: 0.88rem;
+    font-size: 0.92rem;
     font-weight: 800;
     background: var(--blue-soft);
     color: var(--blue);
     margin-bottom: 10px;
+    text-align: center;
     transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.1);
   }
 
-  .rule-banner.twist {
+  .rule-banner.reverse {
     background: var(--amber-soft);
     color: var(--amber);
+    border: 1.5px solid rgba(217, 119, 6, 0.35);
     box-shadow: 0 4px 14px rgba(217, 119, 6, 0.18);
   }
 
   .rule-banner.insane {
     background: var(--rose-soft);
     color: var(--rose);
+    border: 1.5px solid rgba(225, 29, 72, 0.35);
+  }
+
+  .rule-banner.clear {
+    background: var(--emerald-soft);
+    color: var(--emerald);
   }
 
   .timer-bar-wrap {
@@ -371,45 +391,48 @@
     width: 100%;
     background: linear-gradient(90deg, var(--blue-bright), var(--emerald-bright));
     border-radius: 99px;
-    transition: width 0.05s linear;
   }
 
-  /* Matrix Board */
+  /* Matrix Board - Strict Square Aspect Ratio Fix */
   .matrix-wrapper {
     position: relative;
-    padding: 14px;
+    padding: 12px;
     background: #ffffff;
     border-radius: 22px;
     border: 1px solid #e2e8f0;
     box-shadow: var(--shadow-md);
     transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+    flex-shrink: 0;
   }
 
   .matrix-grid {
     display: grid;
     gap: 8px;
-    width: min(76vw, 410px);
-    height: min(76vw, 410px);
+    width: min(78vw, 370px, 46vh);
+    height: min(78vw, 370px, 46vh);
   }
 
   .cell {
     position: relative;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
     background: #f1f5f9;
     border: 2px solid #e2e8f0;
-    border-radius: 14px;
+    border-radius: 13px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-mono);
-    font-size: clamp(1.25rem, 4vw, 1.85rem);
+    font-size: clamp(1.15rem, 3.8vw, 1.7rem);
     font-weight: 800;
     color: var(--text-primary);
     cursor: pointer;
-    transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.12s ease, background-color 0.2s ease, border-color 0.2s ease;
   }
 
   .cell:active {
-    transform: scale(0.93);
+    transform: scale(0.92);
   }
 
   /* Cell States */
@@ -417,7 +440,7 @@
     background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
     border-color: var(--blue-bright);
     color: var(--blue);
-    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);
+    box-shadow: 0 4px 10px rgba(14, 165, 233, 0.14);
   }
 
   .cell.visible.decoy {
@@ -430,11 +453,11 @@
     background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
     border-color: transparent;
     color: transparent;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
   }
 
-  .cell.hidden-tile:hover {
-    filter: brightness(1.06);
+  .cell.hidden-tile .cell-inner {
+    opacity: 0;
   }
 
   .cell.solved {
@@ -442,7 +465,11 @@
     border-color: var(--emerald-bright);
     color: var(--emerald);
     pointer-events: none;
-    animation: pop-in 0.25s ease;
+    animation: pop-in 0.22s ease;
+  }
+
+  .cell.solved .cell-inner {
+    opacity: 1;
   }
 
   .cell.wrong {
@@ -452,31 +479,36 @@
     animation: shake 0.35s ease;
   }
 
+  .cell.wrong .cell-inner {
+    opacity: 1;
+  }
+
   .cell-inner {
     transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
   }
 
   /* Result Screen */
   .result-card {
     width: 100%;
-    max-width: 500px;
+    max-width: 480px;
     text-align: center;
   }
 
   .rank-pill {
     display: inline-block;
-    padding: 6px 16px;
+    padding: 5px 14px;
     border-radius: 99px;
     background: var(--blue-soft);
     color: var(--blue);
     font-weight: 800;
-    font-size: 0.82rem;
-    margin-bottom: 10px;
+    font-size: 0.78rem;
+    margin-bottom: 8px;
   }
 
   .rank-grade {
     font-family: var(--font-mono);
-    font-size: 4.2rem;
+    font-size: 4rem;
     font-weight: 800;
     line-height: 1.05;
     background: linear-gradient(135deg, var(--blue) 0%, var(--emerald) 100%);
@@ -486,29 +518,29 @@
   }
 
   .rank-subtitle {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text-secondary);
-    margin-bottom: 22px;
+    margin-bottom: 20px;
   }
 
   .result-metrics {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 
   .r-box {
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 16px;
-    padding: 14px 10px;
+    padding: 12px 8px;
     box-shadow: var(--shadow-sm);
   }
 
   .r-label {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 700;
     color: var(--text-muted);
     margin-bottom: 4px;
@@ -516,14 +548,14 @@
 
   .r-value {
     font-family: var(--font-mono);
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 800;
     color: var(--text-primary);
   }
 
   .result-btns {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     justify-content: center;
     flex-wrap: wrap;
   }
@@ -573,12 +605,12 @@
         <div class="mode-card selected" data-mode="standard">
           <div class="mode-tag">STANDARD</div>
           <div class="mode-name">標準プロトコル</div>
-          <div class="mode-sub">4×4〜6×6盤面。段階的に記憶数とギミックが増加。</div>
+          <div class="mode-sub">4×4〜6×6盤面。偶数レベルでは【逆順（大→小）】ルールが出現。</div>
         </div>
         <div class="mode-card hard" data-mode="rotation">
           <div class="mode-tag">HARD // ROTATE</div>
           <div class="mode-name">空間回転モード</div>
-          <div class="mode-sub">隠された直後に盤面が90°〜180°回転。頭の中で座標変換せよ。</div>
+          <div class="mode-sub">隠された直後に盤面全体が90°〜180°回転。頭の中で座標変換せよ。</div>
         </div>
         <div class="mode-card insane" data-mode="chaos">
           <div class="mode-tag">INSANE // CHAOS</div>
@@ -593,7 +625,8 @@
     <!-- SCREEN 2: GAME -->
     <section class="screen" id="screen-game">
       <div class="stage-header">
-        <div class="rule-banner" id="rule-banner">1 から順番にタップせよ</div>
+        <div class="phase-indicator" id="phase-indicator">MEMORIZE PHASE</div>
+        <div class="rule-banner" id="rule-banner">【昇順】 1 → 4 の順にタップせよ</div>
         <div class="timer-bar-wrap">
           <div class="timer-bar-fill" id="timer-fill"></div>
         </div>
@@ -664,7 +697,6 @@ const Sound = {
     osc.start(t);
     osc.stop(t + duration);
   },
-  // Pentatonic ascending chime on each correct tile
   step(index) {
     const scale = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.50, 1174.66, 1318.51, 1567.98, 1760.00];
     const freq = scale[index % scale.length] * (1 + Math.floor(index / scale.length) * 0.25);
@@ -743,10 +775,10 @@ function renderFX() {
 renderFX();
 
 /* ==========================================================================
-   3. HIGH-DIFFICULTY MEMORY GAME ENGINE
+   3. HIGH-DIFFICULTY MEMORY GAME ENGINE (BUG-FREE & COMPLETE)
    ========================================================================== */
 const Game = {
-  mode: 'standard', // standard | rotation | chaos
+  mode: 'standard',
   level: 1,
   score: 0,
   lives: 3,
@@ -756,11 +788,10 @@ const Game = {
   targetCount: 4,
   expectedSequence: [],
   currentIndex: 0,
-  rotationDeg: 0,
+  nextRotation: 0,
   timerRAF: null,
 
   init() {
-    // Mode selection
     document.querySelectorAll('.mode-card').forEach(card => {
       card.addEventListener('click', () => {
         Sound.init();
@@ -808,7 +839,6 @@ const Game = {
     this.phase = 'memorize';
     this.currentIndex = 0;
 
-    // Determine grid size & number count based on level
     if (this.level <= 2) this.gridSize = 4;
     else if (this.level <= 5) this.gridSize = 5;
     else this.gridSize = 6;
@@ -816,26 +846,25 @@ const Game = {
     const maxCells = this.gridSize * this.gridSize;
     this.targetCount = Math.min(maxCells - 2, 3 + this.level);
 
-    // Determine special rules (Twists)
+    // Special rules
     let isReverse = false;
     let decoyCount = 0;
-    let nextRotation = 0;
+    this.nextRotation = 0;
 
     if (this.mode === 'standard') {
       if (this.level >= 4 && this.level % 2 === 0) isReverse = true;
       if (this.level >= 6) decoyCount = Math.min(3, Math.floor((this.level - 4) / 2));
     } else if (this.mode === 'rotation') {
       const angles = [90, -90, 180];
-      nextRotation = angles[Math.floor(Math.random() * angles.length)];
+      this.nextRotation = angles[Math.floor(Math.random() * angles.length)];
       if (this.level >= 5 && this.level % 2 === 1) isReverse = true;
     } else if (this.mode === 'chaos') {
       isReverse = (this.level % 2 === 0);
       decoyCount = Math.min(4, 1 + Math.floor(this.level / 2));
       const angles = [90, -90, 180];
-      nextRotation = angles[Math.floor(Math.random() * angles.length)];
+      this.nextRotation = angles[Math.floor(Math.random() * angles.length)];
     }
 
-    // Build sequence [1, 2, ..., targetCount]
     const nums = Array.from({ length: this.targetCount }, (_, i) => i + 1);
     this.expectedSequence = isReverse ? [...nums].reverse() : [...nums];
 
@@ -851,7 +880,6 @@ const Game = {
       cellMap.set(indices[idx], { value: num, isDecoy: false });
     });
 
-    // Add Decoy numbers (Red traps that must NOT be clicked)
     for (let d = 0; d < decoyCount; d++) {
       const cellIdx = indices[this.targetCount + d];
       if (cellIdx !== undefined) {
@@ -860,27 +888,29 @@ const Game = {
       }
     }
 
-    // Reset wrapper rotation cleanly before showing
+    // Reset wrapper rotation cleanly
     const wrapper = document.getElementById('matrix-wrapper');
     wrapper.style.transition = 'none';
     wrapper.style.transform = 'rotate(0deg)';
     void wrapper.offsetWidth;
     wrapper.style.transition = 'transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1)';
 
-    // Update Banner
+    // Update Banner & Phase Indicator
+    document.getElementById('phase-indicator').textContent = 'MEMORIZE PHASE // 記憶フェーズ';
     const banner = document.getElementById('rule-banner');
     let bannerText = isReverse
       ? `【逆順】 ${this.targetCount} → 1 の順にタップせよ！`
       : `【昇順】 1 → ${this.targetCount} の順にタップせよ`;
     if (decoyCount > 0) bannerText += `（赤数字は罠！）`;
-    if (nextRotation !== 0) bannerText += ` ＋ 回転あり`;
+    if (this.nextRotation !== 0) bannerText += ` ＋ 回転あり`;
 
     banner.textContent = bannerText;
-    banner.className = 'rule-banner' + (this.mode === 'chaos' ? ' insane' : (isReverse || nextRotation !== 0 ? ' twist' : ''));
+    banner.className = 'rule-banner' + (this.mode === 'chaos' ? ' insane' : (isReverse ? ' reverse' : ''));
 
-    // Render Grid
+    // Render Grid with explicit square rows & columns
     const gridEl = document.getElementById('matrix-grid');
     gridEl.style.gridTemplateColumns = `repeat(${this.gridSize}, 1fr)`;
+    gridEl.style.gridTemplateRows = `repeat(${this.gridSize}, 1fr)`;
     gridEl.innerHTML = '';
 
     for (let i = 0; i < maxCells; i++) {
@@ -894,7 +924,7 @@ const Game = {
         cell.classList.add('visible');
         if (data.isDecoy) cell.classList.add('decoy');
         inner.textContent = data.value;
-        cell.dataset.val = data.value;
+        cell.dataset.val = String(data.value);
         cell.dataset.decoy = data.isDecoy ? '1' : '0';
       } else {
         cell.dataset.val = '0';
@@ -902,14 +932,16 @@ const Game = {
       }
 
       cell.appendChild(inner);
-      cell.addEventListener('pointerdown', (e) => this.handleCellTap(cell, e));
+      cell.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.handleCellTap(cell, e);
+      });
       gridEl.appendChild(cell);
     }
 
     // Memorization countdown timer
-    // Shorter time on higher levels to push working memory limit
-    const baseTime = this.mode === 'chaos' ? 1600 : 2100;
-    const memorizeDuration = Math.max(1200, baseTime + this.targetCount * 360 - this.level * 60);
+    const baseTime = this.mode === 'chaos' ? 1800 : 2300;
+    const memorizeDuration = Math.max(1400, baseTime + this.targetCount * 380 - this.level * 50);
     const startT = performance.now();
     const timerFill = document.getElementById('timer-fill');
 
@@ -920,7 +952,7 @@ const Game = {
       timerFill.style.width = `${pct}%`;
 
       if (elapsed >= memorizeDuration) {
-        this.concealBoard(nextRotation);
+        this.concealBoard(null);
       } else {
         this.timerRAF = requestAnimationFrame(tickMemorize);
       }
@@ -928,29 +960,37 @@ const Game = {
     this.timerRAF = requestAnimationFrame(tickMemorize);
   },
 
-  concealBoard(rotationDeg) {
+  // Conceal board (optionally triggered immediately when player taps first tile!)
+  concealBoard(firstTappedCell) {
+    if (this.phase !== 'memorize') return;
+    cancelAnimationFrame(this.timerRAF);
     this.phase = 'recall';
     Sound.hide();
 
+    document.getElementById('phase-indicator').textContent = 'RECALL PHASE // 解答フェーズ';
+
     document.querySelectorAll('.cell.visible').forEach(cell => {
-      cell.classList.remove('visible', 'decoy');
-      cell.classList.add('hidden-tile');
+      if (cell !== firstTappedCell) {
+        cell.classList.remove('visible', 'decoy');
+        cell.classList.add('hidden-tile');
+      }
     });
 
-    if (rotationDeg !== 0) {
+    // Apply rotation if scheduled for this level!
+    if (this.nextRotation !== 0) {
+      const deg = this.nextRotation;
       setTimeout(() => {
         Sound.rotate();
         const wrapper = document.getElementById('matrix-wrapper');
-        wrapper.style.transform = `rotate(${rotationDeg}deg)`;
-        // Counter-rotate inner text so numbers remain upright when revealed
+        wrapper.style.transform = `rotate(${deg}deg)`;
         document.querySelectorAll('.cell-inner').forEach(el => {
-          el.style.transform = `rotate(${-rotationDeg}deg)`;
+          el.style.transform = `rotate(${-deg}deg)`;
         });
-      }, 120);
+      }, 80);
     }
 
     // Recall phase time limit
-    const recallLimit = Math.max(4000, 4500 + this.targetCount * 1100);
+    const recallLimit = Math.max(4500, 5000 + this.targetCount * 1150);
     const startT = performance.now();
     const timerFill = document.getElementById('timer-fill');
 
@@ -970,23 +1010,18 @@ const Game = {
   },
 
   handleCellTap(cell, event) {
-    // Allow player to immediately start tapping during memorize phase!
+    // Ignore taps on empty background cells (val === 0)
+    const val = parseInt(cell.dataset.val, 10);
+    if (val === 0) return;
+
+    // If tapped during memorize phase, conceal other tiles AND trigger rotation + recall timer properly
     if (this.phase === 'memorize') {
-      cancelAnimationFrame(this.timerRAF);
-      // Conceal all OTHER tiles immediately
-      document.querySelectorAll('.cell.visible').forEach(c => {
-        if (c !== cell) {
-          c.classList.remove('visible', 'decoy');
-          c.classList.add('hidden-tile');
-        }
-      });
-      this.phase = 'recall';
+      this.concealBoard(cell);
     }
 
     if (this.phase !== 'recall') return;
     if (cell.classList.contains('solved')) return;
 
-    const val = parseInt(cell.dataset.val, 10);
     const isDecoy = cell.dataset.decoy === '1';
     const expected = this.expectedSequence[this.currentIndex];
 
@@ -1002,7 +1037,6 @@ const Game = {
       this.updateHUD();
 
       if (this.currentIndex >= this.expectedSequence.length) {
-        // Level Cleared!
         this.phase = 'transition';
         cancelAnimationFrame(this.timerRAF);
         this.maxDigitsCleared = Math.max(this.maxDigitsCleared, this.targetCount);
@@ -1012,7 +1046,7 @@ const Game = {
 
         const banner = document.getElementById('rule-banner');
         banner.textContent = `CLEAR! +${250 * this.level} BONUS`;
-        banner.className = 'rule-banner';
+        banner.className = 'rule-banner clear';
 
         setTimeout(() => {
           this.level++;
@@ -1022,7 +1056,10 @@ const Game = {
       }
     } else {
       // Wrong tile or Decoy trap!
-      this.handleMistake(cell, isDecoy ? 'TRAP TRIGGERED!' : 'SEQUENCE ERROR!');
+      const msg = isDecoy
+        ? 'TRAP TRIGGERED!（赤い罠数字）'
+        : `SEQUENCE ERROR!（次は「${expected}」をタップ）`;
+      this.handleMistake(cell, msg);
     }
   },
 
@@ -1032,11 +1069,11 @@ const Game = {
     Sound.wrong();
 
     if (cell) {
-      cell.classList.remove('hidden-tile');
+      cell.classList.remove('hidden-tile', 'visible');
       cell.classList.add('wrong');
     }
 
-    // Reveal all remaining tiles so player sees what they missed
+    // Reveal all remaining hidden tiles
     document.querySelectorAll('.cell.hidden-tile').forEach(c => {
       c.classList.remove('hidden-tile');
       c.classList.add('visible');
@@ -1056,7 +1093,7 @@ const Game = {
       } else {
         this.setupLevel();
       }
-    }, 1250);
+    }, 1500);
   },
 
   showResults() {
@@ -1072,7 +1109,6 @@ const Game = {
     document.getElementById('res-digits').textContent = `${this.maxDigitsCleared}個`;
     document.getElementById('res-score').textContent = this.score.toLocaleString();
 
-    // Calculate Rank
     const mult = this.mode === 'chaos' ? 1.4 : (this.mode === 'rotation' ? 1.2 : 1.0);
     const effective = this.maxDigitsCleared * mult;
 
